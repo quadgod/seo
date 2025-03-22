@@ -1,0 +1,20 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  DEFAULT_DATABASE_URL: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - go mod tidy
+    silent: true
+  build-pgm:
+    cmds:
+      - go build -o ./bin/pgm ./cmd/pgm/main.go
+  mig:create:
+    deps:
+      - build-pgm
+    cmds:
+      - bin/pgm --command=create --migrationsDir=./migrations --migrationName={{.CLI_ARGS}}

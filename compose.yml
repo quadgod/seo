@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres:17.4
+    container_name: pg
+    environment:
+      POSTGRES_USER: "local"
+      POSTGRES_PASSWORD: "password"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
